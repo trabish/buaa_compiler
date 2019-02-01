@@ -1,0 +1,990 @@
+.data
+$para: .word 0:100
+array: .word 0:100
+ch: .word 0
+i: .word 0
+j: .word 0
+scope_var: .word 0
+$string0: .asciiz "success!\n"
+$string1: .asciiz "fail!\n"
+$string10: .asciiz " x==y:true\n"
+$string11: .asciiz " x>y:true\n"
+$string12: .asciiz " x<y:true\n"
+$string13: .asciiz " x>=y:true\n"
+$string14: .asciiz " x<=y:true\n"
+$string15: .asciiz " x!=y:true\n"
+$string16: .asciiz "success!\n"
+$string17: .asciiz "fail!\n"
+$string18: .asciiz "fail1!\n"
+$string19: .asciiz "success!\n"
+$string2: .asciiz "success1!\n"
+$string20: .asciiz "fail2!\n"
+$string21: .asciiz "the local scope_var = \n"
+$string22: .asciiz "the global scope_var = \n"
+$string23: .asciiz "the global scope_var = \n"
+$string24: .asciiz "success!\n"
+$string25: .asciiz "fail!\n"
+$string26: .asciiz "test_recursion begin:\n"
+$string27: .asciiz "test_if begin:\n"
+$string28: .asciiz "test_while begin:\n"
+$string29: .asciiz "test_switch begin:\n"
+$string3: .asciiz "success2!\n"
+$string30: .asciiz "test_scanf_printf begin:\n"
+$string31: .asciiz "test_expression begin:\n"
+$string32: .asciiz "test_symbol begin:\n"
+$string33: .asciiz "test_relation_operator begin:\n"
+$string34: .asciiz "test_scope begin:\n"
+$string35: .asciiz "*********************\n"
+$string36: .asciiz "ch=\n"
+$string37: .asciiz "@#$$&*^^^^test end\n"
+$string4: .asciiz "fail1!\n"
+$string5: .asciiz "success!\n"
+$string6: .asciiz "fail!\n"
+$string7: .asciiz "success!\n"
+$string8: .asciiz "fail!\n"
+$string9: .asciiz "Input is:\n"
+.text
+subi $sp $sp 44
+j main
+Fibonacci:
+sw $ra 0($sp)
+lw $t0 92($sp)
+li $t1 1
+sw $t0 44($sp)
+sw $t1 48($sp)
+bne $t0 $t1 lable0
+li $t0 1
+add $v0 $t0 $0
+lw $ra 0($sp)
+addi $sp $sp 96
+jr $ra
+lable0:
+lw $t0 92($sp)
+li $t1 2
+sw $t0 64($sp)
+sw $t1 68($sp)
+bne $t0 $t1 lable1
+li $t0 1
+add $v0 $t0 $0
+lw $ra 0($sp)
+addi $sp $sp 96
+jr $ra
+lable1:
+lw $t0 92($sp)
+li $t1 1
+sub $t0 $t0 $t1
+add $a0 $t0 $0
+sw $a0 -4($sp)
+sw $t0 76($sp)
+sw $t1 80($sp)
+subi $sp $sp 96
+jal Fibonacci
+add $t0 $v0 $0
+lw $t1 92($sp)
+li $t2 2
+sub $t1 $t1 $t2
+add $a0 $t1 $0
+sw $a0 -4($sp)
+sw $t0 84($sp)
+sw $t1 88($sp)
+sw $t2 52($sp)
+subi $sp $sp 96
+jal Fibonacci
+add $t0 $v0 $0
+lw $t1 84($sp)
+addu $t1 $t1 $t0
+add $v0 $t1 $0
+lw $ra 0($sp)
+addi $sp $sp 96
+jr $ra
+lw $ra 0($sp)
+addi $sp $sp 96
+jr $ra
+test_recursion:
+sw $ra 0($sp)
+li $t0 8
+add $a0 $t0 $0
+sw $a0 -4($sp)
+sw $t0 44($sp)
+subi $sp $sp 96
+jal Fibonacci
+add $t0 $v0 $0
+li $t1 21
+sw $t0 48($sp)
+sw $t1 52($sp)
+bne $t0 $t1 lable2
+li $v0 4
+la $a0 $string0
+syscall
+li $t0 0
+add $v0 $t0 $0
+lw $ra 0($sp)
+addi $sp $sp 64
+jr $ra
+lable2:
+li $v0 4
+la $a0 $string1
+syscall
+li $t0 0
+add $v0 $t0 $0
+lw $ra 0($sp)
+addi $sp $sp 64
+jr $ra
+lw $ra 0($sp)
+addi $sp $sp 64
+jr $ra
+test_if:
+ 
+li $t0 97
+add $t1 $t0 $0
+add $t2 $t1 $0
+lw $t3 76($sp)
+addu $t2 $t2 $t3
+li $t4 103
+sub $t5 $t2 $t4
+sw $t0 44($sp)
+sw $t1 72($sp)
+sw $t2 48($sp)
+sw $t3 52($sp)
+sw $t4 56($sp)
+blez $t5 lable3
+li $v0 4
+la $a0 $string2
+syscall
+lable3:
+lw $t0 72($sp)
+li $t1 0
+sw $t0 60($sp)
+beq $t0 $t1 lable4
+li $v0 4
+la $a0 $string3
+syscall
+lable4:
+li $t0 0
+li $t1 0
+sw $t0 64($sp)
+beq $t0 $t1 lable5
+li $v0 4
+la $a0 $string4
+syscall
+lable5:
+li $t0 0
+add $v0 $t0 $0
+ 
+addi $sp $sp 80
+jr $ra
+ 
+addi $sp $sp 80
+jr $ra
+test_while:
+ 
+li $t0 0
+add $t1 $t0 $0
+li $t2 0
+add $t3 $t2 $0
+sw $t0 44($sp)
+sw $t1 112($sp)
+sw $t2 48($sp)
+sw $t3 268501796
+while_lable6:
+lw $t0 268501796
+li $t1 100
+sub $t2 $t0 $t1
+sw $t0 52($sp)
+sw $t1 56($sp)
+bgez $t2 lable7
+lw $t0 268501796
+lw $t1 268501796
+sll $t2 $t0 2
+sw $t1 268501392($t2)
+lw $t2 268501796
+li $t3 1
+addu $t2 $t2 $t3
+add $t4 $t2 $0
+sw $t0 60($sp)
+sw $t1 64($sp)
+sw $t2 68($sp)
+sw $t3 72($sp)
+sw $t4 268501796
+j while_lable6
+lable7:
+li $t0 0
+add $t1 $t0 $0
+sw $t0 76($sp)
+sw $t1 268501796
+while_lable8:
+lw $t0 268501796
+li $t1 100
+sub $t2 $t0 $t1
+sw $t0 80($sp)
+sw $t1 84($sp)
+bgez $t2 lable9
+lw $t0 112($sp)
+lw $t1 268501796
+addu $t0 $t0 $t1
+add $t2 $t0 $0
+lw $t3 268501796
+li $t4 1
+addu $t3 $t3 $t4
+add $t5 $t3 $0
+sw $t0 88($sp)
+sw $t1 92($sp)
+sw $t2 112($sp)
+sw $t3 96($sp)
+sw $t4 100($sp)
+sw $t5 268501796
+j while_lable8
+lable9:
+lw $t0 112($sp)
+li $t1 4950
+sw $t0 104($sp)
+sw $t1 108($sp)
+bne $t0 $t1 lable10
+li $v0 4
+la $a0 $string5
+syscall
+ 
+addi $sp $sp 116
+jr $ra
+lable10:
+li $v0 4
+la $a0 $string6
+syscall
+ 
+addi $sp $sp 116
+jr $ra
+ 
+addi $sp $sp 116
+jr $ra
+test_switch:
+ 
+li $t0 97
+add $t1 $t0 $0
+add $t2 $t1 $0
+li $t3 97
+sw $t0 44($sp)
+sw $t1 52($sp)
+sw $t2 48($sp)
+bne $t2 $t3 lable12
+li $v0 4
+la $a0 $string7
+syscall
+j lable11
+lable12:
+li $v0 4
+la $a0 $string8
+syscall
+lable11:
+ 
+addi $sp $sp 56
+jr $ra
+to_upper:
+ 
+lw $t0 52($sp)
+lw $t1 56($sp)
+sub $t0 $t0 $t1
+add $v0 $t0 $0
+ 
+addi $sp $sp 60
+jr $ra
+ 
+addi $sp $sp 60
+jr $ra
+test_scanf_printf:
+sw $ra 0($sp)
+li $v0 12
+syscall
+add $t0 $v0 $0
+li $v0 12
+syscall
+add $t1 $v0 $0
+li $v0 12
+syscall
+add $t2 $v0 $0
+li $v0 4
+la $a0 $string9
+syscall
+add $t3 $t0 $0
+li $v0 11
+add $a0 $t3 $0
+syscall
+add $t4 $t1 $0
+li $v0 11
+add $a0 $t4 $0
+syscall
+add $t5 $t2 $0
+li $v0 11
+add $a0 $t5 $0
+syscall
+add $t6 $t0 $0
+li $t7 32
+add $a0 $t6 $0
+sw $a0 -8($sp)
+add $a0 $t7 $0
+sw $a0 -4($sp)
+sw $t0 92($sp)
+sw $t1 96($sp)
+sw $t2 100($sp)
+sw $t3 44($sp)
+sw $t4 48($sp)
+sw $t5 52($sp)
+sw $t6 56($sp)
+sw $t7 60($sp)
+subi $sp $sp 60
+jal to_upper
+add $t0 $v0 $0
+li $v0 1
+add $a0 $t0 $0
+syscall
+lw $t1 96($sp)
+li $t2 32
+add $a0 $t1 $0
+sw $a0 -8($sp)
+add $a0 $t2 $0
+sw $a0 -4($sp)
+sw $t0 64($sp)
+sw $t1 68($sp)
+sw $t2 72($sp)
+subi $sp $sp 60
+jal to_upper
+add $t0 $v0 $0
+li $v0 1
+add $a0 $t0 $0
+syscall
+lw $t1 100($sp)
+li $t2 32
+add $a0 $t1 $0
+sw $a0 -8($sp)
+add $a0 $t2 $0
+sw $a0 -4($sp)
+sw $t0 76($sp)
+sw $t1 80($sp)
+sw $t2 84($sp)
+subi $sp $sp 60
+jal to_upper
+add $t0 $v0 $0
+li $v0 1
+add $a0 $t0 $0
+syscall
+sw $t0 88($sp)
+lw $ra 0($sp)
+addi $sp $sp 104
+jr $ra
+test_relation_operator:
+ 
+lw $t0 92($sp)
+lw $t1 96($sp)
+sw $t0 44($sp)
+sw $t1 48($sp)
+bne $t0 $t1 lable13
+li $v0 4
+la $a0 $string10
+syscall
+lable13:
+lw $t0 92($sp)
+lw $t1 96($sp)
+sub $t2 $t0 $t1
+sw $t0 52($sp)
+sw $t1 56($sp)
+blez $t2 lable14
+li $v0 4
+la $a0 $string11
+syscall
+lable14:
+lw $t0 92($sp)
+lw $t1 96($sp)
+sub $t2 $t0 $t1
+sw $t0 60($sp)
+sw $t1 64($sp)
+bgez $t2 lable15
+li $v0 4
+la $a0 $string12
+syscall
+lable15:
+lw $t0 92($sp)
+lw $t1 96($sp)
+sub $t2 $t0 $t1
+sw $t0 68($sp)
+sw $t1 72($sp)
+bltz $t2 lable16
+li $v0 4
+la $a0 $string13
+syscall
+lable16:
+lw $t0 92($sp)
+lw $t1 96($sp)
+sub $t2 $t0 $t1
+sw $t0 76($sp)
+sw $t1 80($sp)
+bgtz $t2 lable17
+li $v0 4
+la $a0 $string14
+syscall
+lable17:
+lw $t0 92($sp)
+lw $t1 96($sp)
+sw $t0 84($sp)
+sw $t1 88($sp)
+beq $t0 $t1 lable18
+li $v0 4
+la $a0 $string15
+syscall
+lable18:
+ 
+addi $sp $sp 100
+jr $ra
+test_expression:
+sw $ra 0($sp)
+li $t0 10
+add $t1 $t0 $0
+li $t2 1
+add $t3 $t2 $0
+li $t4 0
+li $t5 2
+mult $t4 $t5
+mflo $t4
+li $t6 2
+sll $t7 $t4 2
+add $t7 $t7 $sp
+sw $t6 128($t7)
+add $t7 $t1 $0
+li $t8 1
+add $t9 $t1 $0
+mult $t8 $t9
+mflo $t8
+sw $t0 44($sp)
+li $t0 0
+sw $t3 136($sp)
+sw $t2 48($sp)
+sll $t2 $t0 2
+add $t2 $t2 $sp
+lw $t3 128($t2)
+mult $t8 $t3
+mflo $t8
+lw $t2 136($sp)
+sw $t5 56($sp)
+li $t5 0
+sub $t2 $t5 $t2
+mult $t8 $t2
+mflo $t8
+sw $t6 60($sp)
+lw $t6 136($sp)
+mult $t8 $t6
+mflo $t8
+sw $t4 52($sp)
+li $t4 2
+div $t8 $t4
+mflo $t8
+sub $t8 $t5 $t8
+sw $t7 64($sp)
+li $t7 42
+addu $t8 $t8 $t7
+sw $t1 132($sp)
+li $t1 97
+sw $t9 72($sp)
+li $t9 -32
+sub $t9 $t5 $t9
+add $a0 $t1 $0
+sw $a0 -8($sp)
+add $a0 $t9 $0
+sw $a0 -4($sp)
+sw $t0 80($sp)
+sw $t1 104($sp)
+sw $t2 88($sp)
+sw $t3 84($sp)
+sw $t4 96($sp)
+sw $t6 92($sp)
+sw $t7 100($sp)
+sw $t8 68($sp)
+sw $t9 108($sp)
+subi $sp $sp 60
+jal to_upper
+add $t0 $v0 $0
+lw $t1 68($sp)
+addu $t1 $t1 $t0
+li $t2 65
+sub $t1 $t1 $t2
+lw $t3 64($sp)
+addu $t3 $t3 $t1
+add $t4 $t3 $0
+add $t5 $t4 $0
+li $t6 62
+sw $t0 112($sp)
+sw $t1 68($sp)
+sw $t2 116($sp)
+sw $t3 64($sp)
+sw $t4 140($sp)
+sw $t5 120($sp)
+sw $t6 124($sp)
+bne $t5 $t6 lable19
+li $v0 4
+la $a0 $string16
+syscall
+lw $ra 0($sp)
+addi $sp $sp 144
+jr $ra
+lable19:
+li $v0 4
+la $a0 $string17
+syscall
+lw $ra 0($sp)
+addi $sp $sp 144
+jr $ra
+lw $ra 0($sp)
+addi $sp $sp 144
+jr $ra
+test_symbol:
+ 
+li $t0 42
+add $t1 $t0 $0
+li $t2 47
+add $t3 $t2 $0
+li $t4 43
+add $t5 $t4 $0
+li $t6 45
+add $t7 $t6 $0
+li $t8 95
+add $t9 $t8 $0
+sw $t1 240($sp)
+li $t1 1
+sw $t0 196($sp)
+add $t0 $t1 $0
+sw $t3 244($sp)
+li $t3 0
+sw $t2 200($sp)
+add $t2 $t3 $0
+sw $t5 248($sp)
+add $t5 $t0 $0
+sw $t4 204($sp)
+li $t4 0
+sw $t0 260($sp)
+sw $t1 216($sp)
+sw $t2 236($sp)
+sw $t3 220($sp)
+sw $t4 228($sp)
+sw $t5 224($sp)
+sw $t6 208($sp)
+sw $t7 252($sp)
+sw $t8 212($sp)
+sw $t9 256($sp)
+bne $t5 $t4 lable20
+li $v0 4
+la $a0 $string18
+syscall
+lable20:
+li $t0 0
+add $t1 $t0 $0
+lw $t2 240($sp)
+lw $t3 244($sp)
+addu $t2 $t2 $t3
+lw $t4 248($sp)
+addu $t2 $t2 $t4
+lw $t5 252($sp)
+addu $t2 $t2 $t5
+lw $t6 256($sp)
+addu $t2 $t2 $t6
+add $t7 $t2 $0
+sw $t0 232($sp)
+sw $t1 384($sp)
+sw $t2 44($sp)
+sw $t3 48($sp)
+sw $t4 52($sp)
+sw $t5 56($sp)
+sw $t6 60($sp)
+sw $t7 388($sp)
+while_lable21:
+lw $t0 384($sp)
+li $t1 10
+sub $t2 $t0 $t1
+sw $t0 64($sp)
+sw $t1 68($sp)
+bgez $t2 lable22
+lw $t0 384($sp)
+lw $t1 384($sp)
+sll $t2 $t0 2
+add $t2 $t2 $sp
+sw $t1 264($t2)
+lw $t2 384($sp)
+li $t3 1
+addu $t2 $t2 $t3
+add $t4 $t2 $0
+sw $t0 72($sp)
+sw $t1 76($sp)
+sw $t2 80($sp)
+sw $t3 84($sp)
+sw $t4 384($sp)
+j while_lable21
+lable22:
+while_lable23:
+lw $t0 384($sp)
+li $t1 20
+sub $t2 $t0 $t1
+sw $t0 88($sp)
+sw $t1 92($sp)
+bgez $t2 lable24
+lw $t0 384($sp)
+li $t1 97
+lw $t2 384($sp)
+addu $t1 $t1 $t2
+li $t3 10
+sub $t1 $t1 $t3
+sll $t4 $t0 2
+add $t4 $t4 $sp
+sw $t1 264($t4)
+lw $t4 384($sp)
+li $t5 1
+addu $t4 $t4 $t5
+add $t6 $t4 $0
+sw $t0 96($sp)
+sw $t1 100($sp)
+sw $t2 104($sp)
+sw $t3 108($sp)
+sw $t4 112($sp)
+sw $t5 116($sp)
+sw $t6 384($sp)
+j while_lable23
+lable24:
+while_lable25:
+lw $t0 384($sp)
+li $t1 30
+sub $t2 $t0 $t1
+sw $t0 120($sp)
+sw $t1 124($sp)
+bgez $t2 lable26
+lw $t0 384($sp)
+li $t1 65
+lw $t2 384($sp)
+addu $t1 $t1 $t2
+li $t3 20
+sub $t1 $t1 $t3
+sll $t4 $t0 2
+add $t4 $t4 $sp
+sw $t1 264($t4)
+lw $t4 384($sp)
+li $t5 1
+addu $t4 $t4 $t5
+add $t6 $t4 $0
+sw $t0 128($sp)
+sw $t1 132($sp)
+sw $t2 136($sp)
+sw $t3 140($sp)
+sw $t4 144($sp)
+sw $t5 148($sp)
+sw $t6 384($sp)
+j while_lable25
+lable26:
+li $t0 0
+add $t1 $t0 $0
+sw $t0 152($sp)
+sw $t1 384($sp)
+while_lable27:
+lw $t0 384($sp)
+li $t1 30
+sub $t2 $t0 $t1
+sw $t0 156($sp)
+sw $t1 160($sp)
+bgez $t2 lable28
+lw $t0 388($sp)
+lw $t1 384($sp)
+sll $t3 $t1 2
+add $t3 $t3 $sp
+lw $t2 264($t3)
+addu $t0 $t0 $t2
+add $t3 $t0 $0
+lw $t4 384($sp)
+li $t5 1
+addu $t4 $t4 $t5
+add $t6 $t4 $0
+sw $t0 164($sp)
+sw $t1 172($sp)
+sw $t2 176($sp)
+sw $t3 388($sp)
+sw $t4 180($sp)
+sw $t5 184($sp)
+sw $t6 384($sp)
+j while_lable27
+lable28:
+lw $t0 388($sp)
+li $t1 2027
+sw $t0 188($sp)
+sw $t1 192($sp)
+bne $t0 $t1 lable29
+li $v0 4
+la $a0 $string19
+syscall
+ 
+addi $sp $sp 392
+jr $ra
+lable29:
+li $v0 4
+la $a0 $string20
+syscall
+ 
+addi $sp $sp 392
+jr $ra
+ 
+addi $sp $sp 392
+jr $ra
+local_scope:
+ 
+li $t0 10
+add $t1 $t0 $0
+li $v0 4
+la $a0 $string21
+syscall
+add $t2 $t1 $0
+li $v0 1
+add $a0 $t2 $0
+syscall
+sw $t0 44($sp)
+sw $t1 52($sp)
+sw $t2 48($sp)
+ 
+addi $sp $sp 56
+jr $ra
+test_scope:
+sw $ra 0($sp)
+li $t0 20
+add $t1 $t0 $0
+add $t2 $t1 $0
+add $t3 $t2 $0
+li $v0 4
+la $a0 $string22
+syscall
+add $t4 $t1 $0
+li $v0 1
+add $a0 $t4 $0
+syscall
+sw $t0 44($sp)
+sw $t1 268501804
+sw $t2 48($sp)
+sw $t3 68($sp)
+sw $t4 52($sp)
+subi $sp $sp 56
+jal local_scope
+li $v0 4
+la $a0 $string23
+syscall
+lw $t0 268501804
+li $v0 1
+add $a0 $t0 $0
+syscall
+lw $t1 68($sp)
+lw $t2 268501804
+sw $t0 56($sp)
+sw $t1 60($sp)
+sw $t2 64($sp)
+bne $t1 $t2 lable30
+li $v0 4
+la $a0 $string24
+syscall
+lw $ra 0($sp)
+addi $sp $sp 72
+jr $ra
+lable30:
+li $v0 4
+la $a0 $string25
+syscall
+lw $ra 0($sp)
+addi $sp $sp 72
+jr $ra
+lw $ra 0($sp)
+addi $sp $sp 72
+jr $ra
+test:
+sw $ra 0($sp)
+li $t0 0
+add $t1 $t0 $0
+li $t2 9
+add $t3 $t2 $0
+sw $t0 44($sp)
+sw $t1 132($sp)
+sw $t2 48($sp)
+sw $t3 136($sp)
+while_lable31:
+lw $t0 132($sp)
+lw $t1 136($sp)
+sub $t2 $t0 $t1
+sw $t0 52($sp)
+sw $t1 56($sp)
+bgez $t2 lable32
+li $v0 5
+syscall
+add $t0 $v0 $0
+add $t1 $t0 $0
+li $t2 0
+sw $t0 128($sp)
+sw $t1 60($sp)
+bne $t1 $t2 lable34
+li $v0 4
+la $a0 $string26
+syscall
+subi $sp $sp 64
+jal test_recursion
+j lable33
+lable34:
+lw $t0 60($sp)
+li $t1 1
+bne $t0 $t1 lable35
+li $v0 4
+la $a0 $string27
+syscall
+li $t0 20
+add $a0 $t0 $0
+sw $a0 -4($sp)
+sw $t0 64($sp)
+subi $sp $sp 80
+jal test_if
+j lable33
+lable35:
+lw $t0 60($sp)
+li $t1 2
+bne $t0 $t1 lable36
+li $v0 4
+la $a0 $string28
+syscall
+subi $sp $sp 116
+jal test_while
+j lable33
+lable36:
+lw $t0 60($sp)
+li $t1 3
+bne $t0 $t1 lable37
+li $v0 4
+la $a0 $string29
+syscall
+subi $sp $sp 56
+jal test_switch
+j lable33
+lable37:
+lw $t0 60($sp)
+li $t1 4
+bne $t0 $t1 lable38
+li $v0 4
+la $a0 $string30
+syscall
+subi $sp $sp 104
+jal test_scanf_printf
+j lable33
+lable38:
+lw $t0 60($sp)
+li $t1 5
+bne $t0 $t1 lable39
+li $v0 4
+la $a0 $string31
+syscall
+subi $sp $sp 144
+jal test_expression
+j lable33
+lable39:
+lw $t0 60($sp)
+li $t1 6
+bne $t0 $t1 lable40
+li $v0 4
+la $a0 $string32
+syscall
+subi $sp $sp 392
+jal test_symbol
+j lable33
+lable40:
+lw $t0 60($sp)
+li $t1 7
+bne $t0 $t1 lable41
+li $v0 4
+la $a0 $string33
+syscall
+li $t0 1
+li $t1 2
+addu $t0 $t0 $t1
+li $t2 2
+li $t3 4
+addu $t2 $t2 $t3
+add $a0 $t0 $0
+sw $a0 -8($sp)
+add $a0 $t2 $0
+sw $a0 -4($sp)
+sw $t0 68($sp)
+sw $t1 72($sp)
+sw $t2 76($sp)
+sw $t3 80($sp)
+subi $sp $sp 100
+jal test_relation_operator
+li $t0 1
+li $t1 6
+addu $t0 $t0 $t1
+li $t2 2
+li $t3 3
+addu $t2 $t2 $t3
+add $a0 $t0 $0
+sw $a0 -8($sp)
+add $a0 $t2 $0
+sw $a0 -4($sp)
+sw $t0 84($sp)
+sw $t1 88($sp)
+sw $t2 92($sp)
+sw $t3 96($sp)
+subi $sp $sp 100
+jal test_relation_operator
+li $t0 1
+li $t1 1
+addu $t0 $t0 $t1
+li $t2 2
+add $a0 $t0 $0
+sw $a0 -8($sp)
+add $a0 $t2 $0
+sw $a0 -4($sp)
+sw $t0 100($sp)
+sw $t1 104($sp)
+sw $t2 108($sp)
+subi $sp $sp 100
+jal test_relation_operator
+j lable33
+lable41:
+lw $t0 60($sp)
+li $t1 8
+bne $t0 $t1 lable42
+li $v0 4
+la $a0 $string34
+syscall
+subi $sp $sp 72
+jal test_scope
+j lable33
+lable42:
+lable33:
+li $v0 4
+la $a0 $string35
+syscall
+lw $t0 132($sp)
+li $t1 1
+addu $t0 $t0 $t1
+add $t2 $t0 $0
+sw $t0 112($sp)
+sw $t1 116($sp)
+sw $t2 132($sp)
+j while_lable31
+lable32:
+li $t0 95
+add $t1 $t0 $0
+li $v0 4
+la $a0 $string36
+syscall
+add $t2 $t1 $0
+li $v0 11
+add $a0 $t2 $0
+syscall
+li $v0 4
+la $a0 $string37
+syscall
+sw $t0 120($sp)
+sw $t1 268501792
+sw $t2 124($sp)
+lw $ra 0($sp)
+addi $sp $sp 140
+jr $ra
+main:
+sw $ra 0($sp)
+subi $sp $sp 140
+jal test
+lw $ra 0($sp)
+addi $sp $sp 44
+end:

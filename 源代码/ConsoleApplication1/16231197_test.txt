@@ -1,0 +1,194 @@
+const int const_int_a=-12,const_int_b=34;
+const char const_char_a='a',const_char_b='b';
+int var_int_a,var_int_b, var_int_array[10];
+char var_char_a,var_char_b,var_char_array[10];
+
+int factorial(int n)
+{
+	if(n<=1)
+		return (1);
+	return (n*factorial(n-1));
+
+}
+
+char test_function_1(int Parameter_int_a,char Parameter_char_a)
+{
+	printf("Parameter_int_a:",Parameter_int_a);
+	printf("Parameter_char_a:",Parameter_char_a);
+
+
+	return ('a');
+}
+
+void test_function_2()
+{
+	printf("there is no Parameter");
+	return ;
+}
+
+void test_function_3(int i,int j,char a,char b)
+{
+	int  var_int_array[10];
+	if(i<j)
+	{
+		printf("i < j");
+		switch(i)
+		{
+			case 0: 
+			{
+				while(i<4)
+				{
+					var_int_array[i]=i+1;
+					i=i+1;
+				}
+				j=1;
+				i=0;
+				while(i<4)
+				{
+					j=j*var_int_array[i];
+					i=i+1;
+				}
+				printf("now_j:",j);
+				printf("a-12:",a-12);
+				printf("a+b*'a':",a+b*'a');
+			}
+			case 1:			;
+			default:
+			{
+				printf("a-11:",a-11);
+				printf("a+b/'a':",a+b/'a');
+			}			
+		}
+	}
+	return;
+}
+
+void main()
+{
+	const int const_int_c=56,const_int_d=78;
+	const char const_char_c='c',const_char_d='d';
+	int var_int_c,var_int_d;
+	char var_char_c,var_char_d;
+	printf("=======================");
+	{
+		printf(1+2);
+		printf("const_int_a:",const_int_a);
+		printf("const_int_b:",const_int_b);
+		printf("const_int_c:",const_int_c);
+		printf("const_int_d:",const_int_d);
+
+		printf("const_char_c:",const_char_c);
+		printf("const_char_d:",const_char_d);
+		printf("const_char_a:",const_char_a);
+		printf("const_char_b:",const_char_b);
+	}
+	printf("=======================");
+	{
+		var_int_a=const_int_a+1+factorial(factorial(2));
+		var_int_b=const_int_b-1;
+		var_int_c=const_int_a*1;
+		var_int_d=const_int_a/1;
+		printf("var_int_a:",var_int_a);
+		printf("var_int_b:",var_int_b);
+		printf("var_int_c:",var_int_c);
+		printf("var_int_d:",var_int_d);
+		var_char_a=const_char_a;
+		var_char_b=const_char_b;
+		var_char_c=const_char_c;
+		var_char_d=const_char_d;
+		printf("var_char_a:",var_char_a);
+		printf("var_char_b:",var_char_b);
+		printf("var_char_c:",var_char_c);
+		printf("var_char_d:",var_char_d);
+
+		var_int_array[1+4/3]=1;
+		var_char_array[2/2/2]='a';
+		printf("var_int_array[1+4/3]:",var_int_array[1+4/3]);
+		printf("var_char_array[2/2/2]:",var_char_array[2/2/2]);
+	}
+	printf("=======================");
+	{
+		var_int_a=+1*1-2/2;
+		printf("var_int_a:",var_int_a);
+		var_int_a=1-2;
+		printf("var_int_a:",var_int_a);
+		var_int_a=-var_int_array[0];
+		printf("var_int_a:",var_int_a);
+
+	}
+	printf("=======================");
+	{
+		if(const_int_a==12)
+			printf("const_int_a==12");
+		if(const_int_a!=12)
+			printf("const_int_a!=12");
+		if(const_int_a>const_int_b)
+			printf("const_int_a>=const_int_b");
+		if(const_int_a>=const_int_b)
+			printf("const_int_a>=const_int_b");
+		if(const_int_a<const_int_b)
+			printf("const_int_a<const_int_b");
+		if(const_int_a<=const_int_b)
+			printf("const_int_a<=const_int_b");
+		if(0)
+            			printf("impossible");
+        		if(const_int_a)
+            			printf("expression!=0");
+		
+	}
+	printf("=======================");
+	{
+		var_int_a=5;
+		while(var_int_a>=1)
+		{
+			var_int_a=var_int_a-1;
+			printf("now var_int_a:",var_int_a);
+		}
+	}
+	printf("=======================");
+	{
+		var_int_a=factorial(3/2+1);
+		printf("factorial(2):",var_int_a);
+		var_int_a=factorial(4*9/8);
+		printf("factorial(4):",var_int_a);
+
+	}
+	printf("=======================");
+	{
+		var_char_a=test_function_1(var_int_a,var_char_a);
+		printf("var_char_a:",var_char_a);
+		test_function_2();
+		test_function_3(0,factorial(1),'a','b');
+	}
+	printf("=======================");
+	{
+		printf("input number:");
+		scanf(var_int_a);
+		var_int_b=factorial(var_int_a);
+		printf("factorial(var_int_a):",var_int_b);
+	}
+	printf("=======================");
+	{
+		var_int_a=3;
+		switch(var_int_a)
+		{
+			case 1:
+				printf("switch case_1");
+			case 2:
+				printf("switch case_2");
+			default:
+				printf("switch default");
+		}
+		var_char_a='a';
+		switch(var_char_a)
+		{
+			case 'a':
+				printf("switch case_a");
+			case 'b':
+				printf("switch case_b");
+		}
+	}
+	;
+	return ;
+	
+}

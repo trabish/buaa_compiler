@@ -1,0 +1,484 @@
+
+char Fibonacci()
+@T0 = n
+@T1 = 1
+EQ  @T0  @T1  lable0
+@T2 = 1
+ret @T2
+lable      lable0
+@T3 = n
+@T4 = 2
+EQ  @T3  @T4  lable1
+@T5 = 1
+ret @T5
+lable      lable1
+@T6 = n
+@T7 = 1
+@T6 = @T6 - @T7
+push @T6
+call Fibonacci
+@T8 = RET
+@T9 = n
+@T10 = 2
+@T9 = @T9 - @T10
+push @T9
+call Fibonacci
+@T11 = RET
+@T8 = @T8 + @T11
+ret @T8
+end
+
+char test_recursion()
+@T12 = 8
+push @T12
+call Fibonacci
+@T13 = RET
+@T14 = 21
+EQ  @T13  @T14  lable2
+printf  string    $string0
+@T15 = 0
+ret @T15
+lable      lable2
+printf  string    $string1
+@T16 = 0
+ret @T16
+end
+
+char test_if()
+@T17 = 97
+ch = @T17
+@T18 = ch
+@T19 = plus
+@T18 = @T18 + @T19
+@T20 = 103
+MORE  @T18  @T20  lable3
+printf  string    $string2
+lable      lable3
+@T21 = ch
+NOTEQ  @T21  0  lable4
+printf  string    $string3
+lable      lable4
+@T22 = 0
+NOTEQ  @T22  0  lable5
+printf  string    $string4
+lable      lable5
+@T23 = 0
+ret @T23
+end
+
+void test_while()
+@T24 = 0
+sum = @T24
+@T25 = 0
+i = @T25
+lable      while_lable6
+@T26 = i
+@T27 = 100
+LESS  @T26  @T27  lable7
+@T28 = i
+@T29 = i
+array[@T28] = @T29
+@T30 = i
+@T31 = 1
+@T30 = @T30 + @T31
+i = @T30
+GOTO      while_lable6
+lable      lable7
+@T32 = 0
+i = @T32
+lable      while_lable8
+@T33 = i
+@T34 = 100
+LESS  @T33  @T34  lable9
+@T35 = sum
+@T36 = i
+@T35 = @T35 + @T36
+sum = @T35
+@T37 = i
+@T38 = 1
+@T37 = @T37 + @T38
+i = @T37
+GOTO      while_lable8
+lable      lable9
+@T39 = sum
+@T40 = 4950
+EQ  @T39  @T40  lable10
+printf  string    $string5
+ret 
+lable      lable10
+printf  string    $string6
+ret 
+end
+
+void test_switch()
+@T41 = 97
+flag = @T41
+@T42 = flag
+EQ  @T42  97  lable12
+printf  string    $string7
+GOTO      lable11
+lable      lable12
+printf  string    $string8
+lable      lable11
+end
+
+char to_upper()
+@T43 = a
+@T44 = b
+@T43 = @T43 - @T44
+ret @T43
+end
+
+void test_scanf_printf()
+scanf  char    a
+scanf  char    b
+scanf  char    c
+printf  string    $string9
+@T45 = a
+printf  char    @T45
+@T46 = b
+printf  char    @T46
+@T47 = c
+printf  char    @T47
+@T48 = a
+push @T48
+@T49 = 32
+push @T49
+call to_upper
+@T50 = RET
+printf  int    @T50
+@T51 = b
+push @T51
+@T52 = 32
+push @T52
+call to_upper
+@T53 = RET
+printf  int    @T53
+@T54 = c
+push @T54
+@T55 = 32
+push @T55
+call to_upper
+@T56 = RET
+printf  int    @T56
+end
+
+void test_relation_operator()
+@T57 = x
+@T58 = y
+EQ  @T57  @T58  lable13
+printf  string    $string10
+lable      lable13
+@T59 = x
+@T60 = y
+MORE  @T59  @T60  lable14
+printf  string    $string11
+lable      lable14
+@T61 = x
+@T62 = y
+LESS  @T61  @T62  lable15
+printf  string    $string12
+lable      lable15
+@T63 = x
+@T64 = y
+MOREEQ  @T63  @T64  lable16
+printf  string    $string13
+lable      lable16
+@T65 = x
+@T66 = y
+LESSEQ  @T65  @T66  lable17
+printf  string    $string14
+lable      lable17
+@T67 = x
+@T68 = y
+NOTEQ  @T67  @T68  lable18
+printf  string    $string15
+lable      lable18
+end
+
+void test_expression()
+@T69 = 10
+x = @T69
+@T70 = 1
+y = @T70
+@T71 = 0
+@T72 = 2
+@T71 = @T71 * @T72
+@T73 = 2
+A[@T71] = @T73
+@T74 = x
+@T75 = 1
+@T76 = x
+@T75 = @T75 * @T76
+@T78 = 0
+@T79 = A[@T78]
+@T75 = @T75 * @T79
+@T80 = y
+@T80 = 0 - @T80
+@T75 = @T75 * @T80
+@T81 = y
+@T75 = @T75 * @T81
+@T82 = 2
+@T75 = @T75 / @T82
+@T75 = 0 - @T75
+@T83 = 42
+@T75 = @T75 + @T83
+@T84 = 97
+push @T84
+@T85 = -32
+@T85 = 0 - @T85
+push @T85
+call to_upper
+@T86 = RET
+@T75 = @T75 + @T86
+@T87 = 65
+@T75 = @T75 - @T87
+@T74 = @T74 + @T75
+z = @T74
+@T88 = z
+@T89 = 62
+EQ  @T88  @T89  lable19
+printf  string    $string16
+ret 
+lable      lable19
+printf  string    $string17
+ret 
+end
+
+void test_symbol()
+@T90 = 42
+_a1 = @T90
+@T91 = 47
+_a2 = @T91
+@T92 = 43
+_a3 = @T92
+@T93 = 45
+_a4 = @T93
+@T94 = 95
+_a5 = @T94
+@T95 = 1
+aa = @T95
+@T96 = 0
+Aa = @T96
+@T97 = aa
+@T98 = 0
+EQ  @T97  @T98  lable20
+printf  string    $string18
+lable      lable20
+@T99 = 0
+i = @T99
+@T100 = _a1
+@T101 = _a2
+@T100 = @T100 + @T101
+@T102 = _a3
+@T100 = @T100 + @T102
+@T103 = _a4
+@T100 = @T100 + @T103
+@T104 = _a5
+@T100 = @T100 + @T104
+sum = @T100
+lable      while_lable21
+@T105 = i
+@T106 = 10
+LESS  @T105  @T106  lable22
+@T107 = i
+@T108 = i
+array[@T107] = @T108
+@T109 = i
+@T110 = 1
+@T109 = @T109 + @T110
+i = @T109
+GOTO      while_lable21
+lable      lable22
+lable      while_lable23
+@T111 = i
+@T112 = 20
+LESS  @T111  @T112  lable24
+@T113 = i
+@T114 = 97
+@T115 = i
+@T114 = @T114 + @T115
+@T116 = 10
+@T114 = @T114 - @T116
+array[@T113] = @T114
+@T117 = i
+@T118 = 1
+@T117 = @T117 + @T118
+i = @T117
+GOTO      while_lable23
+lable      lable24
+lable      while_lable25
+@T119 = i
+@T120 = 30
+LESS  @T119  @T120  lable26
+@T121 = i
+@T122 = 65
+@T123 = i
+@T122 = @T122 + @T123
+@T124 = 20
+@T122 = @T122 - @T124
+array[@T121] = @T122
+@T125 = i
+@T126 = 1
+@T125 = @T125 + @T126
+i = @T125
+GOTO      while_lable25
+lable      lable26
+@T127 = 0
+i = @T127
+lable      while_lable27
+@T128 = i
+@T129 = 30
+LESS  @T128  @T129  lable28
+@T130 = sum
+@T132 = i
+@T133 = array[@T132]
+@T130 = @T130 + @T133
+sum = @T130
+@T134 = i
+@T135 = 1
+@T134 = @T134 + @T135
+i = @T134
+GOTO      while_lable27
+lable      lable28
+@T136 = sum
+@T137 = 2027
+EQ  @T136  @T137  lable29
+printf  string    $string19
+ret 
+lable      lable29
+printf  string    $string20
+ret 
+end
+
+void local_scope()
+@T138 = 10
+scope_var = @T138
+printf  string    $string21
+@T139 = scope_var
+printf  int    @T139
+end
+
+void test_scope()
+@T140 = 20
+scope_var = @T140
+@T141 = scope_var
+tem = @T141
+printf  string    $string22
+@T142 = scope_var
+printf  int    @T142
+call local_scope
+printf  string    $string23
+@T143 = scope_var
+printf  int    @T143
+@T144 = tem
+@T145 = scope_var
+EQ  @T144  @T145  lable30
+printf  string    $string24
+ret 
+lable      lable30
+printf  string    $string25
+ret 
+end
+
+void test()
+@T146 = 0
+j = @T146
+@T147 = 9
+k = @T147
+lable      while_lable31
+@T148 = j
+@T149 = k
+LESS  @T148  @T149  lable32
+scanf  int    i
+@T150 = i
+EQ  @T150  0  lable34
+printf  string    $string26
+call test_recursion
+GOTO      lable33
+lable      lable34
+EQ  @T150  1  lable35
+printf  string    $string27
+@T151 = 20
+push @T151
+call test_if
+GOTO      lable33
+lable      lable35
+EQ  @T150  2  lable36
+printf  string    $string28
+call test_while
+GOTO      lable33
+lable      lable36
+EQ  @T150  3  lable37
+printf  string    $string29
+call test_switch
+GOTO      lable33
+lable      lable37
+EQ  @T150  4  lable38
+printf  string    $string30
+call test_scanf_printf
+GOTO      lable33
+lable      lable38
+EQ  @T150  5  lable39
+printf  string    $string31
+call test_expression
+GOTO      lable33
+lable      lable39
+EQ  @T150  6  lable40
+printf  string    $string32
+call test_symbol
+GOTO      lable33
+lable      lable40
+EQ  @T150  7  lable41
+printf  string    $string33
+@T152 = 1
+@T153 = 2
+@T152 = @T152 + @T153
+push @T152
+@T154 = 2
+@T155 = 4
+@T154 = @T154 + @T155
+push @T154
+call test_relation_operator
+@T156 = 1
+@T157 = 6
+@T156 = @T156 + @T157
+push @T156
+@T158 = 2
+@T159 = 3
+@T158 = @T158 + @T159
+push @T158
+call test_relation_operator
+@T160 = 1
+@T161 = 1
+@T160 = @T160 + @T161
+push @T160
+@T162 = 2
+push @T162
+call test_relation_operator
+GOTO      lable33
+lable      lable41
+EQ  @T150  8  lable42
+printf  string    $string34
+call test_scope
+GOTO      lable33
+lable      lable42
+lable      lable33
+printf  string    $string35
+@T163 = j
+@T164 = 1
+@T163 = @T163 + @T164
+j = @T163
+GOTO      while_lable31
+lable      lable32
+@T165 = 95
+ch = @T165
+printf  string    $string36
+@T166 = ch
+printf  char    @T166
+printf  string    $string37
+end
+
+void main()
+call test
+end
